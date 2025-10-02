@@ -2,6 +2,7 @@ require("dotenv").config()
 const jwt = require("jsonwebtoken")
 const express = require("express")
 const bcrypt = require("bcrypt")
+const cookieParser = require("cookie-parser")
 const db = require("better-sqlite3")("ourApp.db")
 db.pragma("journal_mode = WAL")
 
@@ -21,10 +22,24 @@ createTables()
 const app = express()
 
 app.set("view engine", "ejs")
+app.use(cookieParser())
 app.use(express.urlencoded({extended: false}))
 
 app.use(function (req, res, next) {
     res.locals.errors = []
+
+    // try to decode cookie
+    try {
+        const decoded = jwt.verify(req.cookies.ourSimpleApp, process.env.JWTSECRET)
+        req.user = decoded
+    } catch(err) {
+        req.user = false
+    }
+
+    res.locals.user = req.user
+
+    console.log(req.user)
+
     next()
 })
 
@@ -62,12 +77,15 @@ app.post('/register', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, salt)
 
     const ourStatement = db.prepare("INSERT INTO users (username, password) VALUES (?, ?)")
-    ourStatement.run(req.body.username, req.body.password)
+    const result = ourStatement.run(req.body.username, req.body.password)
+
+    const lookupStatement = db.prepare("SELECT * FROM users WHERE ROWID = ?")
+    const ourUser = lookupStatement.get(result.lastInsertRowid)
 
     // log user in by sending cookie
-    const ourTokenValue = jwt.sign({userId: }, process.env.JWTSECRET)
+    const ourTokenValue = jwt.sign({exp: Math.floor(Date.now() / 1000), userid: ourUser.id, username: ourUser.username}, process.env.JWTSECRET)
 
-    res.cookie("ourSimpleApp", "id", {
+    res.cookie("ourSimpleApp", ourTokenValue, {
         httpOnly: true,
         secure: true, // only https connection
         sameSite: "strict",
