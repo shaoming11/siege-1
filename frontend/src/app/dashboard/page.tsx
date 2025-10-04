@@ -1,6 +1,6 @@
 "use client"
 
-export default function() {
+export default function Dashboard() {
     return(
         <div>
             <h1>dashboard</h1>

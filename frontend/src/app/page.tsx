@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button"
-import { PhaserGame } from "@/components/phaser/PhaserGame";
 
 export default function Home() {
   const balance = 100; // replace
 
   return (
     <div>
-      <PhaserGame></PhaserGame>
       <Button>Press here to play plinko balls</Button>
       <p>
         table of contents
