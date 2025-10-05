@@ -43,6 +43,10 @@ app.use(function (req, res, next) {
     next()
 })
 
+app.post('/bet', (req, res) => {
+
+})
+
 app.get('/', (req, res) => {
     res.render("homepage")
 })
