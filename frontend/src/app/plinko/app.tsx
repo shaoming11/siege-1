@@ -3,18 +3,15 @@
 import { useRef, useState, useEffect } from 'react';
 import { IRefPhaserGame, PhaserGame } from '@/components/PhaserGame';
 import { MainMenu } from '@/components/phaser/game/scenes/MainMenu';
-import { useRouter } from 'next/navigation';
+import { Game } from '@/components/phaser/game/scenes/Game';
 
 export default function Plinko() 
 {
-    const url = 'http://localhost:6700'
-    const router = useRouter()
 
     const buttonStyling = 'border-black border-5 p-5';
 
     const [canMoveSprite, setCanMoveSprite] = useState(true);
     const [balance, setBalance] = useState<number>(1000);
-    const [loading, setLoading] = useState(false);
 
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
@@ -73,9 +70,6 @@ export default function Plinko()
         }
     }
 
-    const dropBall = () => {
-
-    }
 
     const moveSprite = () => {
         if (phaserRef.current)
@@ -169,7 +163,7 @@ export default function Plinko()
                                 console.log('Game scene after timeout:', gameScene?.scene.key);
                                 if (gameScene && gameScene.scene.key === 'Game') {
                                     console.log('Calling dropBalls method');
-                                    (gameScene as any).dropBalls(betAmount, bias, balls);
+                                    (gameScene as Game).dropBalls(betAmount, bias, balls);
                                 } else {
                                     console.log('Game scene not ready');
                                 }

@@ -216,7 +216,7 @@ export class Game extends Scene {
             const color = colors[multiplier] || 0x3498db;
 
             // Zone rectangle
-            const zone = this.add.rectangle(
+            this.add.rectangle(
                 x + zoneWidth / 2,
                 zoneY + zoneHeight / 2,
                 zoneWidth - 2,
@@ -238,7 +238,7 @@ export class Game extends Scene {
             ).setOrigin(0.5);
 
             // Sensor to detect ball landing
-            const sensor = this.matter.add.rectangle(
+            this.matter.add.rectangle(
                 x + zoneWidth / 2,
                 zoneY + zoneHeight / 2,
                 zoneWidth - 2,
@@ -264,7 +264,7 @@ export class Game extends Scene {
                     // Destroy the ball after landing
                     this.time.delayedCall(500, () => {
                         this.matter.world.remove(bodyB);
-                        (bodyB as any).gameObject?.destroy();
+                        (bodyB as MatterJS.BodyType & { gameObject?: Phaser.GameObjects.GameObject }).gameObject?.destroy();
                     });
                 } else if (bodyB.label?.startsWith('multiplier_') && bodyA.label === 'ball') {
                     const multiplier = parseFloat(bodyB.label.split('_')[1]);
@@ -272,7 +272,7 @@ export class Game extends Scene {
                     
                     this.time.delayedCall(500, () => {
                         this.matter.world.remove(bodyA);
-                        (bodyA as any).gameObject?.destroy();
+                        (bodyA as MatterJS.BodyType & { gameObject?: Phaser.GameObjects.GameObject }).gameObject?.destroy();
                     });
                 }
             });

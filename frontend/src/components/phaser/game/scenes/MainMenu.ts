@@ -1,6 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
 
-import { EventBus } from '../EventBus';
 
 export class MainMenu extends Scene {
     background !: GameObjects.Image;
@@ -38,7 +37,7 @@ export class MainMenu extends Scene {
             0x27ae60
         ).setInteractive({ useHandCursor: true });
 
-        const playText = this.add.text(
+        this.add.text(
             width / 2,
             height / 2 + 50,
             'PLAY',
@@ -86,7 +85,7 @@ export class MainMenu extends Scene {
             const size = Phaser.Math.Between(15, 30);
             const color = Phaser.Utils.Array.GetRandom(colors);
 
-            const balls = this.add.circle(x, y, size, color, 0.3);
+            this.add.circle(x, y, size, color, 0.3);
 
             this.tweens.add({
                 targets: this.ball,

@@ -6,28 +6,22 @@ import { useRouter } from "next/navigation"
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 
 import Link from "next/link"
 
 export default function Home() {
-  const balance = 100; // replace
   const router = useRouter()
-  const [ loggedIn, setLoggedIn] = useState(false);
+  const [ loggedIn] = useState(false);
 
   // redirect if logged in
   useEffect(() => {
     if (loggedIn) {
       router.push('/plinko', undefined)
     }
-  }, [])
+  }, [loggedIn, router])
 
   return (
     <div className="w-full">

@@ -1,11 +1,10 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Login() {
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
-    const [ loggedIn, setLoggedIn ] = useState(false);
 
     const router = useRouter();
 
