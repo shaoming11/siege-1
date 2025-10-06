@@ -11,7 +11,15 @@ You start with $1000. You can edit your bet amount and number of balls to drop. 
 - Next.js framework
 - Hosted by Vercel
 
+# Feature
+- Modern Next.JS App routing
+- Tailwind CSS styling
+- Phaser game integration
+
 # Challenges I ran into
 One major challenge was deploying the project because I had no experience in doing so. I needed to fix build issues, remove unecessary code, and tweak the configuration commands.
 
 Another challenge was handling the user login. Initially, I wanted to use an Express.js framework to handle user login, and connect that to a SQLite database, but it turned out to be much more complicated than I expected. As a result, I stuck to the MVP of building a simple Plinko Balls game.
+
+# Demo
+https://siege-1.vercel.app/plinko
