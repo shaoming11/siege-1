@@ -33,14 +33,10 @@ export default function Home() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="">
-        <Button>Press here to play plinko balls</Button>
+        <Button onClick={() => router.push('/plinko')}>Press here to play plinko balls</Button>
         <h2>how does this game work?</h2>
         <p>
-          basically every hour or 10 minutes u get 100 coins to gamble and u can decide whether or not u wanna gamble and theres a leaderboard somewhere
-        </p>
-        <p>
-          mvp will be just flip a coin
-          then make it so u can do higher risk lower probability
+          when u open the game, u will start with 1000 coins. every ball you drop you spend money and receive money based on the multiplier.
         </p>
       </div>
     </div>
