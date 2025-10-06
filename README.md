@@ -1,6 +1,8 @@
 # Plinko Balls
 A game made for Siege Week 5.
 
+<img width="1047" height="809" alt="Screenshot 2025-10-05 at 9 46 09 PM" src="https://github.com/user-attachments/assets/843529ad-af21-4460-99ca-68099e4b1241" />
+
 A recreation of the popular game Plinko Balls.
 
 # How it Works
